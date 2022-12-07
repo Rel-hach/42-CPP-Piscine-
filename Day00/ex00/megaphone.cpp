@@ -6,7 +6,7 @@
 /*   By: rel-hach <rel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:18:35 by rel-hach          #+#    #+#             */
-/*   Updated: 2022/11/19 01:35:49 by rel-hach         ###   ########.fr       */
+/*   Updated: 2022/11/24 02:18:58 by rel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int main (int ac, char **av)
                 c = std::toupper(str[j]);
                 std::cout << c;
             }
-            if (i != ac - 1)
-                std::cout << " ";
         }
     }
     std::cout << std::endl;
