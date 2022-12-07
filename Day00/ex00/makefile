@@ -1,8 +1,8 @@
 EXECUTABLE	:= megaphone
 
-CC		:= c++
+CPP		:= c++
 
-FLAGS	:= -Wall -Werror -Wextra -std=c++98
+CPPFLAGS	:= -Wall -Werror -Wextra -std=c++98
 
 SRC		:= megaphone.cpp
 
@@ -11,10 +11,10 @@ OBJ		:= megaphone.o
 all: $(EXECUTABLE)
 
 $(OBJ): $(SRC)
-	$(CC) $(FLAGS) -c $< -o $@
+	$(CPP) $(CPPFLAGS) -c $< -o $@
 
 $(EXECUTABLE): $(OBJ)
-	$(CC) $(FLAGS) $< -o $@
+	$(CPP) $(CPPFLAGS) $< -o $@
 
 clean:
 	rm -f $(OBJ)
