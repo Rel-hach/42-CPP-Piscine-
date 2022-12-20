@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Weapon.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rel-hach <rel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 17:08:53 by rel-hach          #+#    #+#             */
-/*   Updated: 2022/12/19 02:54:16 by rel-hach         ###   ########.fr       */
+/*   Created: 2022/12/19 03:45:32 by rel-hach          #+#    #+#             */
+/*   Updated: 2022/12/20 01:30:07 by rel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Harl.hpp"
 
-#ifndef WEAPON_H
-#define WEAPON_H
-
-#include <iostream>
-
-using std::string;
-using std::cout;
-
-class Weapon
+int main (int ac, char **av)
 {
-    private:
-    string _type;
-    public:
-    Weapon(std::string name);
-    ~Weapon();
-    const std::string &getType();
-    void        setType(std::string type);
-};
-
-#endif 
+    Harl Harl;
+    if (ac == 2)
+    {
+        std::string comment = av[1];
+        Harl.complain(comment);
+    }
+    return (0);
+}

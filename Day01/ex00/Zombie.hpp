@@ -6,7 +6,7 @@
 /*   By: rel-hach <rel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 22:59:43 by rel-hach          #+#    #+#             */
-/*   Updated: 2022/11/29 04:39:14 by rel-hach         ###   ########.fr       */
+/*   Updated: 2022/12/19 03:16:24 by rel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ class Zombie
     private:
     std::string _name;
     public:
-    //Zombie();
-    Zombie(std::string  name);
+    Zombie(std::string  name="unamed");
     ~Zombie();
     void    announce(void);
 };

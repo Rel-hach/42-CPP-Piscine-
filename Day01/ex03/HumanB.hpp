@@ -6,7 +6,7 @@
 /*   By: rel-hach <rel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 17:08:43 by rel-hach          #+#    #+#             */
-/*   Updated: 2022/12/13 18:06:42 by rel-hach         ###   ########.fr       */
+/*   Updated: 2022/12/19 02:48:49 by rel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 
 #include <iostream>
 #include "Weapon.hpp"
-
 class HumanB
 {
     private:
         std::string _name;
         Weapon      *_weapon;
     public:
-        HumanB(std::string &name);
+        HumanB(std::string name);
         void    setWeapon(Weapon &weapon);
         void    attack();
 };

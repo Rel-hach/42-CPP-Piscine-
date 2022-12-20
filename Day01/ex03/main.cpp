@@ -6,13 +6,12 @@
 /*   By: rel-hach <rel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 17:08:46 by rel-hach          #+#    #+#             */
-/*   Updated: 2022/12/13 17:53:09 by rel-hach         ###   ########.fr       */
+/*   Updated: 2022/12/19 03:28:28 by rel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "HumanA.hpp"
 #include "HumanB.hpp"
-#include "Weapon.hpp"
 
 int main()
 {

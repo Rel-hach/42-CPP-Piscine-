@@ -1,16 +1,16 @@
-EXECUTABLE = Zombie
+EXECUTABLE = HarlFilter
 
 CPP	= c++
 
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SOURCE = main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
+SOURCE = Harl.cpp main.cpp
 
 OBJECT = $(SOURCE:.cpp=.o)
 
 all: $(EXECUTABLE)
 
-$(EXECUTABLE): $(OBJECT)
+$(EXECUTABLE): $(OBJECT) Harl.hpp
 	$(CPP) $(CPPFLAGS) $(OBJECT) -o $(EXECUTABLE)
 
 clean:
