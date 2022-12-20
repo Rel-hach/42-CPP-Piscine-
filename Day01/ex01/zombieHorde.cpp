@@ -12,7 +12,23 @@
 
 #include "Zombie.hpp"
 
-Zombie* zombieHorde( int N, std::string name )
+void    ft_error_message(std::string str)
 {
+    std::cout << "Error : " << str << std::endl;
+    exit (EXIT_FAILURE);
+}
+
+Zombie* Zombie::zombieHorde( int N, std::string name )
+{
+    if (N < 1)
+        ft_error_message("A horde Must contains at least 1 zombie");
+    Zombie *zombie = new Zombie[N];
+    if (!zombie)
+        ft_error_message("Allocation failed");
     
+    for (int i = 0; i < N; i++)
+    {
+        zombie[i].name = name;
+    }
+    return (zombie);
 }
