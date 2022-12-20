@@ -16,18 +16,6 @@
 // ifstream 'stream' to read from files
 // ofstream 'stream' to write on files
 
-int checkRest(std::string line, std::string s1)
-{
-    int i = 0;
-    while (line[i] && s1[i])
-    {
-        if (line[i] != s1[i])
-            return (0);
-        i++;
-    }
-    return (1);
-}
-
 int main (int ac, char **av)
 {
     if (ac == 4)
@@ -38,6 +26,7 @@ int main (int ac, char **av)
         std::string line;
         std::ifstream file;
         std::string outfile;
+        int ret;
         file.open(file_name);
         if (file.fail())
             std::cout << "error" << std::endl;
@@ -48,22 +37,18 @@ int main (int ac, char **av)
             std::cout << "error" << std::endl;
         while (std::getline(file, line))
         {
-            int i = 0;
-            while (line[i])
+            ret = line.find(s1);
+            while (ret != -1)
             {
-                if (line[i] == s1[0])
-                {
-                    if (checkRest(&line[i], s1))
-                    {
-                        o << s2;
-                        i = i + s1.size();
-                    }
-                }
-               o << line[i];
-                i++;
+                line.erase(ret, s1.size());
+                line.insert(ret, s2);
+                ret = line.find(s1);
             }
+            o << line;
             if (!file.eof())
                 o << std::endl;
         }
+        file.close();
     }
+    return (0);
 }
