@@ -6,7 +6,7 @@
 /*   By: rel-hach <rel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 03:43:40 by rel-hach          #+#    #+#             */
-/*   Updated: 2022/12/20 00:56:26 by rel-hach         ###   ########.fr       */
+/*   Updated: 2022/12/21 01:18:38 by rel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,11 @@ void    Harl::complain(std::string comment)
 {
     int i = 0;
     std::string words[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
-    void (Harl::*ptr[4])(void) = {&Harl::debug,&Harl::info,&Harl::warning,&Harl::error};
+    void (Harl::*ptr[4])();
+    ptr[0] = &Harl::debug;
+    ptr[1] = &Harl::info;
+    ptr[2] = &Harl::warning;
+    ptr[3] = &Harl::error;
     while (i < 4)
     {
         if (words[i] == comment)
