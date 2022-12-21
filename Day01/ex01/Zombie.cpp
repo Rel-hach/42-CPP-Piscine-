@@ -6,22 +6,31 @@
 /*   By: rel-hach <rel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 23:25:44 by rel-hach          #+#    #+#             */
-/*   Updated: 2022/12/19 03:46:36 by rel-hach         ###   ########.fr       */
+/*   Updated: 2022/12/21 02:29:40 by rel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-Zombie::Zombie() {};
+Zombie::Zombie()
+{
+    std::cout << "zombie created" << std::endl;  
+}
 
 Zombie::~Zombie()
 {
-    std::cout << this->name << "has been died" << std::endl;
+    std::cout << "zombie destoyed" << std::endl;
 }
 
 void    Zombie::announce(void)
 {
-    std::cout << name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+    std::cout << name;
+    std::cout <<" : BraiiiiiiinnnzzzZ..." << std::endl;
+}
+
+void Zombie::setName(std::string name)
+{
+    this->name = name;
 }
 
 
