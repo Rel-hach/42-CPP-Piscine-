@@ -6,7 +6,7 @@
 /*   By: rel-hach <rel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 23:25:50 by rel-hach          #+#    #+#             */
-/*   Updated: 2022/12/21 02:35:07 by rel-hach         ###   ########.fr       */
+/*   Updated: 2022/12/21 23:28:00 by rel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ Zombie* zombieHorde( int N, std::string name )
 {
     if (N < 1)
         ft_error_message("A horde Must contains at least 1 zombie");
-    Zombie *zombie = new Zombie[N];
+    Zombie *zombie = new (std::nothrow)Zombie[N];
     if (!zombie)
         ft_error_message("Allocation failed");
     for (int i = 0; i < N; i++)
