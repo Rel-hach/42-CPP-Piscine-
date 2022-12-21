@@ -6,13 +6,11 @@
 /*   By: rel-hach <rel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 22:57:21 by rel-hach          #+#    #+#             */
-/*   Updated: 2022/11/29 04:34:26 by rel-hach         ###   ########.fr       */
+/*   Updated: 2022/12/20 23:59:17 by rel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
-
-//Zombie::Zombie() {}
 
 Zombie::Zombie(std::string  name)
 {
