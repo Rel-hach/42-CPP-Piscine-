@@ -6,15 +6,12 @@
 /*   By: rel-hach <rel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 17:12:49 by rel-hach          #+#    #+#             */
-/*   Updated: 2022/12/20 00:00:36 by rel-hach         ###   ########.fr       */
+/*   Updated: 2022/12/20 23:52:11 by rel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <fstream>
-
-// ifstream 'stream' to read from files
-// ofstream 'stream' to write on files
 
 int main (int ac, char **av)
 {
