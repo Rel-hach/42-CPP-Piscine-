@@ -8,9 +8,11 @@ SOURCE = main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
 
 OBJECT = $(SOURCE:.cpp=.o)
 
+INCLUDE = Weapon.hpp HumanA.hpp HumanB.hpp
+
 all: $(EXECUTABLE)
 
-$(EXECUTABLE): $(OBJECT)
+$(EXECUTABLE): $(OBJECT) $(INCLUDE)
 	$(CPP) $(CPPFLAGS) $(OBJECT) -o $(EXECUTABLE)
 
 clean:
