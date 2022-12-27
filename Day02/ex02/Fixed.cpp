@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rel-hach <rel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/22 04:51:43 by rel-hach          #+#    #+#             */
-/*   Updated: 2022/12/27 04:30:58 by rel-hach         ###   ########.fr       */
+/*   Created: 2022/12/27 05:14:47 by rel-hach          #+#    #+#             */
+/*   Updated: 2022/12/27 05:51:39 by rel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,7 @@
 Fixed::Fixed()
 {
     std::cout << "Default constructor called" << std::endl;
-    this->setRawBits(0);
 }
-
-/* Here The default constructor is called, it shows a message 
-and it calls the function set RawBits to initialize the fixed_point_var with 0
-*/
 
 Fixed::Fixed(const Fixed &obj)
 {
@@ -28,32 +23,10 @@ Fixed::Fixed(const Fixed &obj)
     *this = obj;
 }
 
-/* Here we have called the copy constructor by creating a new object called b
-    and giving in its param an already created object a in order to make a copy.
-    
-    we send its reference as param.
-    
-    'this' is the pointer to B the new object created in main. each time we call
-    a member function, constructor or destructor, the pointer to that object is
-    sent hidden.
-
-
-    Each time you call a method (member function, constructor or deconstructor)
-    a hidden pointer to that object is sent as parameter to that function.
-
-    --------
-
-    when an operator is found, it will check if there is an assignement operator.
-*/
-
 Fixed::~Fixed()
 {
     std::cout << "Destructor called" << std::endl;
 }
-
-/*
-when the program finishes .. a sentence will be printed on the screen.
-*/
 
 Fixed &Fixed::operator=(const Fixed &rhs)
 {
@@ -72,17 +45,5 @@ void Fixed::setRawBits( int const raw )
 {
     this->fixedPointNb = raw;
 }
-
-// This pointer are sent hidden each time you call a member function.
-
-/* 
-when and why we need to call an :
-- overloaded assignment operator --> assigning  
-- copy constructor for copying 
-- destructor for deleting 
-
-
-
- */
 
 

@@ -6,7 +6,7 @@
 /*   By: rel-hach <rel-hach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 05:55:54 by rel-hach          #+#    #+#             */
-/*   Updated: 2022/12/22 06:00:47 by rel-hach         ###   ########.fr       */
+/*   Updated: 2022/12/27 05:41:52 by rel-hach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 #define FIXED_H
 
 #include <iostream>
-
+#include <cmath>
 class Fixed
 {
     private:
-        int fpNb;
-        static const int fbits = 8;
+        int fixedPointNb;
+        static const int fractionalBits = 8;
     public:
         Fixed();
+        Fixed(const int integer);
+        Fixed(const float floatNb);
         Fixed(const Fixed &cp);
         ~Fixed();
         float toFloat( void ) const;
@@ -30,5 +32,7 @@ class Fixed
         int getRawBits( void ) const;
         void setRawBits( int const raw );
 };
+
+std::ostream &operator <<(std::ostream &out, Fixed & os);
 
 #endif
