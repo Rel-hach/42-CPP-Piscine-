@@ -2,13 +2,22 @@
 
 int main ()
 {
-    ClapTrap No1("First-ClapTrap");
-    ClapTrap No2("Second-ClapTrap");
+    std::cout <<  "-   CONSTRUCTING :" << std::endl << std::endl;
+    ClapTrap Ninja1;
+    ClapTrap Ninja2("[NINJA]");
 
-    No1.attack(No2.getName());
-    No2.takeDamage(No1.getDamage());
-    No2.attack(No1.getName());
-    No1.takeDamage(No2.getDamage());
-    No1.beRepaired(5);
-    No2.beRepaired(5);
+    std::cout << "-   TESTING :" << std::endl << std::endl;
+    Ninja1.attack(Ninja2.getName());
+    Ninja2.takeDamage(Ninja1.getDamage());
+
+    Ninja2.attack(Ninja1.getName());
+    Ninja1.takeDamage(Ninja2.getDamage());
+
+    Ninja1.beRepaired(5);
+    Ninja2.beRepaired(5);
+
+    for(int i = 0; i < 9; i++)
+        Ninja2.attack(Ninja1.getName());
+
+    std::cout << "-   DESTRUCTING :" << std::endl << std::endl;
 }
