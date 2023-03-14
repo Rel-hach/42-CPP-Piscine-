@@ -2,13 +2,13 @@ CXX = c++
 
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRC_FILES = main.cpp ClapTrap.cpp
+SRC_FILES = ScavTrap.cpp ClapTrap.cpp main.cpp
 
-INCLUDE = ClapTrap.hpp
+INCLUDE = ScavTrap.hpp ClapTrap.hpp
 
 OBJ_FILES = $(SRC_FILES:.cpp=.o)
 
-EXECUTABLE = ClapTrap
+EXECUTABLE = ScavTrap
 
 all: $(EXECUTABLE)
 
