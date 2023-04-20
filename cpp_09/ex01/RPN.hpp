@@ -25,7 +25,7 @@ class RPN
     public:
         RPN();
         RPN(std::string str);
-        RPN(RPN &obj);
+        RPN(const RPN &obj);
         RPN& operator = (const RPN& obj);
         void            processing( void );
         std::string     getCharacterType(char c);
