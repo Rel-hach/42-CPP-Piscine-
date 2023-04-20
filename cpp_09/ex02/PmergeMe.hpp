@@ -15,6 +15,13 @@
 #include <vector>
 #include <deque>
 #include <iostream>
+#include <string>
+#include <stdlib.h>
+#include <utility>
+#include <sstream>
+#include <limits.h>
+#include <sys/time.h>
+#include <time.h>
 
 typedef std::vector<int> vector;
 typedef std::deque<int> deque;
@@ -22,15 +29,28 @@ typedef std::deque<int> deque;
 class PmergeMe
 {
     private:
+
         vector vecContainer;
         deque deqContainer;
+
     public:
+
+        PmergeMe();
+        PmergeMe(const PmergeMe& obj);
+        PmergeMe& operator = (const PmergeMe& obj);
+
+        void start_processing(char **str);
         void fillVector(char **av);
-        void fillDeque(deque container, char **av);
-        vector mergeSortBegin (vector v,size_t firstIndex, size_t lastIndex);
-        // void mergeSortbegin (deque::iterator it, size_t size);
-        vector mergeSortEnd (vector v1, vector v2);
-        deque mergeSortEnd (deque v1, deque v2);
-        void insertionSort(size_t fx, size_t lx);
-        // void insertionSort(deque::iterator it, size_t size);
+        void fillDeque(char **av);
+        void swap(int& a, int& b);
+
+        void Fstep_mergeSortV (vector& vcontainer);
+        void insertionSortV(vector& vcontainer);
+        void lstep_mergeSortV (vector& vcontainer, vector& v1, vector& v2);
+
+        void Fstep_mergeSortD (deque& dcontainer);
+        void insertionSortD(deque& dcontainer);
+        void lstep_mergeSortD (deque& dcontainer, deque& d1, deque& d2);
+
+        long timeNowIs();
 };
