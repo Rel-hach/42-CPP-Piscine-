@@ -12,139 +12,216 @@
 
 #include "PmergeMe.hpp"
 
+ /*-----------------------------------------------------------------------------*/
+
+template <typename T>
+void printContainerElements(T& container)
+{
+    for (size_t i = 0; i < container.size(); i++)
+        std::cout << container[i] << " ";
+    std::cout << std::endl;
+    
+}
+
+
+long PmergeMe::timeNowIs()
+{
+    struct timeval t;
+
+    gettimeofday(&t, NULL);
+
+    long timeIs = t.tv_sec * 1000000 + t.tv_usec;
+    return (timeIs);
+}
+
+void PmergeMe::swap(int& num1, int& num2)
+{
+    int temp = num1;
+    num1 = num2;
+    num2 = temp;
+}
+
+
+/*-------------------------------------------------------------------------------*/
+
+PmergeMe::PmergeMe() {}
+
+PmergeMe::PmergeMe(const PmergeMe& obj)
+{
+    if (this != &obj)
+        *this = obj;
+}
+
+PmergeMe& PmergeMe::operator = (const PmergeMe& obj)
+{
+    if (this != &obj)
+    {
+        this->vecContainer = obj.vecContainer;
+        this->deqContainer = obj.deqContainer;
+    }
+    return (*this);
+}
+
+/* -----------------------------VECTOR CASE : --------------------------------- */
+
+
+
 void PmergeMe::fillVector(char **av)
 {
-    size_t i = 1;
+    long number, i = 1;
     while (av[i])
-        this->vecContainer.push_back(atoi(av[i++]));
-    if (this->vecContainer.size() > 1)
     {
+        int j = 0;
+        while (isdigit(av[i][j])) j++;
+        if (av[i][j] != '\0') { std::cout << "Error: invalid input" << std::endl; return; }
+        number = atof(av[i]);
+        if (number > INT_MAX || number < 0) { std::cout << "Error: invalid input" << std::endl; return; }
+        this->vecContainer.push_back(number);
+        i++;
+    }
+}
+
+
+void PmergeMe::Fstep_mergeSortV (vector& vcontainer)
+{
+    if (vcontainer.size() <= 10)
+        insertionSortV(vcontainer);
+    else
+    {
+        vector left_side, right_side;
         vector::iterator it;
-        this->vecContainer = mergeSortBegin(this->vecContainer, this->vecContainer.size() - 1);
-        for (it = vecContainer.begin(); it != vecContainer.end(); it++)
+        for (size_t i = 0; i < vcontainer.size() / 2; i++)
         {
-            std::cout << *it << std::endl;
+            left_side.push_back(vcontainer.at(0));
+            vcontainer.erase(vcontainer.begin());
+        }
+        while (!vcontainer.empty())
+        {
+            right_side.push_back(vcontainer.at(0));
+            vcontainer.erase(vcontainer.begin());
+        }
+        Fstep_mergeSortV(left_side);
+        Fstep_mergeSortV(right_side);
+        lstep_mergeSortV(vcontainer, left_side, right_side);
+    }
+}
+
+void PmergeMe::insertionSortV(vector& vcontainer)
+{
+    for (size_t i = 1; i < vcontainer.size(); i++)
+    {
+        for (size_t j = i; j > 0 && vcontainer[j] < vcontainer[j - 1]; j--)
+        {
+            swap(vcontainer[j], vcontainer[j - 1]);
         }
     }
 }
 
-void PmergeMe::fillDeque(deque container, char **av)
+void PmergeMe::lstep_mergeSortV (vector &vcontainer, vector& v1, vector& v2)
 {
-    size_t i = 1;
+    while (!v1.empty() && !v2.empty())
+    {
+
+        if (v1.at(0) > v2.at(0)) { vcontainer.push_back(v2.at(0)); v2.erase(v2.begin()); }
+        else { vcontainer.push_back(v1.at(0)); v1.erase(v1.begin()); }
+    }
+    while (!v1.empty()) { vcontainer.push_back(v1.at(0)); v1.erase(v1.begin()); }
+    while (!v2.empty()) { vcontainer.push_back(v2.at(0)); v2.erase(v2.begin()); }
+}
+
+
+
+/* -----------------------------DEQUE CASE : --------------------------------- */
+
+
+void PmergeMe::fillDeque(char **av)
+{
+   long number, i = 1;
     while (av[i])
-        container.push_back(atoi(av[i++]));
+    {
+        int j = 0;
+        while (isdigit(av[i][j])) j++;
+        if (av[i][j] != '\0') { std::cout << "Error: invalid input" << std::endl; return; }
+        number = atof(av[i]);
+        if (number > INT_MAX || number < 0) { std::cout << "Error: invalid input" << std::endl; return; }
+        this->deqContainer.push_back(number);
+        i++;
+    }
 }
 
-vector PmergeMe::mergeSortBegin (vector v, size_t firstIndex, size_t lastIndex)
+
+void PmergeMe::Fstep_mergeSortD (deque& vcontainer)
 {
-    if (lastIndex - firstIndex <= 10)
+    if (vcontainer.size() <= 10)
+        insertionSortD(vcontainer);
+    else
     {
-        insertionSort(firstIndex, lastIndex);
-        return v;
-    }
-    size_t mid = (lastIndex - firstIndex) / 2;
-    vector v1 = mergeSortBegin(v, firstIndex , mid);
-    vector v2 = mergeSortBegin(v, mid + 1, lastIndex);
-    return( mergeSortEnd (v1, v2));
-}       
-
-// void PmergeMe::mergeSortbegin (deque::iterator it, size_t size)
-// {
-//     if (size <= 20)
-//         insertionSort(it, size);
-//     size_t newSize = size / 2;
-//     mergeSortBegin(it , newSize);
-//     mergeSortBegin(it + newSize, (size - newSize));
-//     mergeSortEnd(it, size, it + size, (size - newSize));
-// }
-
-vector PmergeMe::mergeSortEnd (vector v1, vector v2)
-{
-    vector nvec;
-
-    while (!v1.empty() && !v2.empty())
-    {
-        if (v1.at(0) > v2.at(0)) { nvec.push_back(v2.at(0)); v2.erase(v2.begin()); }
-        else { nvec.push_back(v1.at(0)); v1.erase(v1.begin()); }
-    }
-    while (!v1.empty()) { nvec.push_back(v1.at(0)); v1.erase(v1.begin()); }
-    while (!v2.empty()) { nvec.push_back(v2.at(0)); v2.erase(v1.begin()); }
-    return (nvec);
-}
-
-deque PmergeMe::mergeSortEnd (deque v1, deque v2)
-{
-   deque nvec;
-
-    while (!v1.empty() && !v2.empty())
-    {
-        if (v1.at(0) > v2.at(0)) { nvec.push_back(v2.at(0)); v2.pop_front(); }
-        else { nvec.push_back(v1.at(0)); v1.pop_front(); }
-    }
-    while (!v1.empty()) { nvec.push_back(v1.at(0)); v1.pop_front(); }
-    while (!v2.empty()) { nvec.push_back(v2.at(0)); v2.pop_front(); }
-    return (nvec);
-}
-
-void    PmergeMe::insertionSort(size_t fx, size_t lx)
-{
-    size_t t = 0;
-    for (size_t i = fx + 1; i <= (lx - fx) ; )
-    {
-        if (vecContainer[i] < vecContainer[i - 1])
+        deque left_side, right_side;
+        deque::iterator it;
+        for (size_t i = 0; i < vcontainer.size() / 2; i++)
         {
-            size_t temp = vecContainer[i - 1];
-            vecContainer[i - 1] = vecContainer[i];
-            vecContainer[i] = temp;
-            if (i > 1 && vecContainer[i - 1] < vecContainer[i - 2])
-            { 
-                i--; t++;
-            }
-            else 
-            { 
-                i += t + 1; t = 0;
-            }
+            left_side.push_back(vcontainer.at(0));
+            vcontainer.pop_front();
         }
-        else
-            i++;
+        while (!vcontainer.empty())
+        {
+            right_side.push_back(vcontainer.at(0));
+            vcontainer.pop_front();
+        }
+        Fstep_mergeSortD(left_side);
+        Fstep_mergeSortD(right_side);
+        lstep_mergeSortD(vcontainer, left_side, right_side);
     }
 }
 
-// void PmergeMe::mergeSortEnd (deque::iterator it1, size_t size1, deque::iterator it2, size_t size2)
-// {
-//     for (size_t i = 0; i < size2; i++)
-//     {
-//         for (size_t j = 0; j < size1; j++)
-//         {
-//             if (it1[j] > it2[i])
-//             {
-//                 size_t temp = it1[j];
-//                 it1[i] = it2[j];
-//                 it2[j] = temp;
-//             }
-//         }
-//     }
-// }
+
+void PmergeMe::insertionSortD(deque& dcontainer)
+{
+    for (size_t i = 1; i < dcontainer.size(); i++)
+    {
+        for (size_t j = i; j > 0 && dcontainer[j] < dcontainer[j - 1]; j--)
+        {
+            swap(dcontainer[j], dcontainer[j - 1]);
+        }
+    }
+}
+
+void PmergeMe::lstep_mergeSortD (deque &dcontainer, deque& d1, deque& d2)
+{
+    while (!d1.empty() && !d2.empty())
+    {
+        if (d1.at(0) > d2.at(0)) { dcontainer.push_back(d2.at(0)); d2.pop_front(); }
+        else {dcontainer.push_back(d1.at(0)); d1.pop_front(); }
+    }
+    while (!d1.empty()) { dcontainer.push_back(d1.at(0)); d1.pop_front(); }
+    while (!d2.empty()) { dcontainer.push_back(d2.at(0)); d2.pop_front(); }
+}
+
+void PmergeMe::start_processing(char **str)
+{
+    fillVector(str);
+    fillDeque(str);
+
+    std::cout << "Before: "; printContainerElements<vector>(this->vecContainer);
+    time_t tick_beginVV = timeNowIs();
+    time_t tick_beginV = clock();
+    Fstep_mergeSortV(vecContainer);
+    time_t tick_endVV = timeNowIs();
+    time_t tick_endV = clock();
+
+    std::cout << "After: "; printContainerElements<vector>(this->vecContainer);
+
+    time_t tick_beginD = clock();
+    time_t tick_beginDD = timeNowIs();
+    Fstep_mergeSortD(deqContainer);
+    time_t tick_endD = clock();
+    time_t tick_endDD = timeNowIs();
 
 
-// void    PmergeMe::insertionSort(deque::iterator it, size_t size)
-// {
-//     size_t t = 0;
-//     for (size_t i = 1; i < size ; )
-//     {
-//         if (it[i] < it[i - 1])
-//         {
-//             size_t temp = it[i - 1];
-//             it[i - 1] = it[i];
-//             it[i] = temp;
-//             if (i > 1 && it[i - 1] < it[i - 2]) {
-//                 i--; t++;
-//             }
-//             else {
-//                 i += t + 1; t = 0;
-//             }
-//         }
-//         else
-//             i++;
-//     }
-// }
+    std::cout << "Time to process a range of " << vecContainer.size() <<" elements with  std::vector : " << ((double)(tick_endV - tick_beginV) / CLOCKS_PER_SEC) * 10000 << " us" << std::endl;
+    std::cout << "Time to process a range of " << deqContainer.size() <<" elements with  std::deque : " << ((double)(tick_endD - tick_beginD) / CLOCKS_PER_SEC) * 10000 << " us" << std::endl;
+
+
+    std::cout << "Time to process a range of " << vecContainer.size() <<" elements with  std::vector : " << (- tick_beginVV + tick_endVV) << std::endl;
+    std::cout << "Time to process a range of " << deqContainer.size() <<" elements with  std::deque : " << (- tick_beginDD + tick_endDD) << std::endl;
+}
