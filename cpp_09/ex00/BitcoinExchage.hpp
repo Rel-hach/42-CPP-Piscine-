@@ -27,14 +27,17 @@ class BitcoinExchange
     private:
         map mapc;
     public:
-        void    readFile (std::string fileName, std::string fileName2);
+        BitcoinExchange();
+        BitcoinExchange(const BitcoinExchange& obj);
+        BitcoinExchange& operator = (const BitcoinExchange& obj);
+        void    readFile (std::string fileName);
         bool    checkFormat(std::string s);
         bool    checkDateFormat(std::string date);
         int     daysInMonth(int month, int year);
         bool    checkNumber(std::string number);
-        bool    checkLineValidity(std::string s, map &mapc);
-        bool    checkDateValidity(std::string s, std::string date);
-        bool    checkValueValidity(std::string s, std::string value);
+        void    checkLineValidity(std::string s, map &mapc);
+        bool    dateIsValid(std::string line, std::string date);
+        bool    valueIsValid(std::string line, std::string value);
         map::iterator getExchangeRate(std::string date, map &mapc);
         void    printFile(map &mapc);
 };
