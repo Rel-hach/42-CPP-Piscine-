@@ -21,7 +21,7 @@ RPN::RPN(std::string str)
     this->string = str;
 }
 
-RPN::RPN(RPN &obj)
+RPN::RPN(const RPN &obj)
 {
     if (this != &obj)
         *this = obj;
