@@ -12,5 +12,13 @@
 
 #include "BitcoinExchage.hpp"
 
-
-
+int main (int ac, char **av)
+{
+    if (ac != 2)
+    {
+        std::cout << "Error: invalid number of arguments ." << std::endl;
+        return (0);
+    }
+    BitcoinExchange Bitcoin;
+    Bitcoin.readFile(av[1]);
+}
